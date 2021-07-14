@@ -6,10 +6,11 @@ Face detection in movie
 import cv2
 import numpy as np
 from imutils.object_detection import non_max_suppression
+import matplotlib.pyplot as plt
 
 
 movie = cv2.VideoCapture('./SDS/Day3/ex3-3_object_detection/AESPA.mp4')
-out_path = './SDS/Day3/ex3-3_object_detection/AESPA.avi'
+out_path = './SDS/Day3/ex3-3_object_detection/AESPA_face_detection.avi'
 if movie.isOpened():  # running in Colab
     pass
 else:  # running in Pycharm
@@ -49,11 +50,17 @@ while (movie.isOpened()):
         for (xA, yA, xB, yB) in pick:
             cv2.rectangle(frame, (xA, yA), (xB, yB), (0, 255, 0), 2)
 
-        # Display the resulting frame
-        cv2.imshow('Frame', frame)
+        # display the resulting frame
+        try:  # running in Pycharm
+          cv2.imshow("Frame", frame)
+        except:  # running in Colab
+          frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+          plt.imshow(frame_rgb)
+          plt.title("Frame")
+          plt.show()
 
         # write frame
-        # out.write(frame)
+        out.write(frame)
 
         # Press Q on keyboard to  exit
         if cv2.waitKey(25) & 0xFF == ord('q'):

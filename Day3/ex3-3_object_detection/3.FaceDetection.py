@@ -6,10 +6,11 @@ Face detection
 import cv2
 import numpy as np
 from imutils.object_detection import non_max_suppression
+import matplotlib.pyplot as plt
 
 
 Image = cv2.imread('./SDS/Day3/ex3-3_object_detection/GFRIEND.jpg')
-if Image:  # running in Colab
+if isinstance(Image, np.ndarray):   # running in Colab
     pass
 else:  # running in Pycharm
     Image = cv2.imread('./GFRIEND.jpg')
@@ -31,11 +32,16 @@ pick = non_max_suppression(rects, probs=None, overlapThresh=0.65)
 for (xA, yA, xB, yB) in pick:
     cv2.rectangle(Image, (xA, yA), (xB, yB), (0, 255, 0), 2)
 
-# Display the resulting frame
-
-cv2.imshow('Image', Image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-cv2.imwrite('./FaceDetectionResult.png', Image)
+# display the resulting frame
+try:  # running in Pycharm
+    cv2.imshow("Image", Image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    cv2.imwrite('./FaceDetectionResult.png', Image)
+except:  # running in Colab
+    Image_rgb = cv2.cvtColor(Image, cv2.COLOR_BGR2RGB)
+    plt.imshow(Image_rgb)
+    plt.title("Image")
+    plt.show()
+    cv2.imwrite('./SDS/Day3/ex3-3_object_detection/FaceDetectionResult.png', Image)
 

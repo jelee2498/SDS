@@ -14,12 +14,12 @@ import numpy as np
 # flag option#2 :cv2.IMREAD_GRAYSCALE (0)
 # flag option#3 :cv2.IMREAD_UNCHANGED (-1)
 Image = cv2.imread('./SDS/Day3/ex3-3_object_detection/mingky.jpg', 0)
-objectImage = cv2.imread('./SDS/Day3/ex3-3_object_detection/mingkyDoll.jpg', 0)
-if Image:  # running in Colab
+objectImage = cv2.imread('./SDS/Day3/ex3-3_object_detection/mingkydoll.jpg', 0)
+if isinstance(Image, np.ndarray):  # running in Colab
     pass
 else:  # running in Pycharm
     Image = cv2.imread('./mingky.jpg', 0)
-    objectImage = cv2.imread('./mingkyDoll.jpg', 0)
+    objectImage = cv2.imread('./mingkydoll.jpg', 0)
 
 # calculate keypoints
 
