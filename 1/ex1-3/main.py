@@ -1,6 +1,5 @@
 """ Photometric stereo """
 import cv2
-import scipy.io
 from normal_map import normal_map
 
 
