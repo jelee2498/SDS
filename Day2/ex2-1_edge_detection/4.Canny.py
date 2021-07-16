@@ -12,7 +12,8 @@ try:  # running in Colab
 except FileNotFoundError:  # running in Pycharm
     image = io.imread('./sample2.jpg')
 
-image = image[:, :, 1]
+image = image[:, :, 0]
+
 
 # plot original image
 

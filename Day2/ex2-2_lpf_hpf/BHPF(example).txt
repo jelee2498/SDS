@@ -1,0 +1,58 @@
+import matplotlib.pyplot as plt
+from skimage import io, filters, feature
+import numpy
+from scipy import fftpack
+import scipy
+
+# Load image file
+fpath = 'F:/MIPL/SDS/0.excercise/2/ex2-3_LPF_HPF/'
+image = io.imread(fpath + 'character.tif').astype('float64')
+
+# Fourier Transform
+imageFFT = fftpack.fft2(image)
+imageFFT = fftpack.fftshift(imageFFT)
+
+# Butterworth Filter
+sizeI, sizeJ = image.shape
+n = 3  # order
+d0 = sizeI/40  # cutoff fregquency
+
+ButterworthFilter = numpy.zeros(image.shape)
+i = 0
+while i < sizeI:
+    j = 0
+    while j < sizeJ:
+        Duv = pow(i - (sizeI-1)/2, 2) + pow(j - (sizeJ-1)/2, 2)
+        ButterworthFilter[i, j] = ?
+        j += 1
+    i += 1
+
+# Apply filter
+imageFFTFiltered = numpy.multiply(imageFFT, ButterworthFilter)
+
+# Inverse Fourier Transform
+imageIFFT = fftpack.ifftshift(imageFFTFiltered)
+imageFiltered = numpy.real(fftpack.ifft2(imageIFFT))
+
+imageFiltered = imageFiltered - imageFiltered.min()
+
+# Plot
+plt.figure(figsize=(10, 10), dpi=150)
+plt.subplot(3, 3, 1)
+plt.imshow(image, cmap='gray')
+plt.title('OriginalImage', {'fontsize': 10})
+plt.subplot(3, 3, 4)
+plt.imshow(scipy.log10(1+scipy.absolute(imageFFT)), cmap='gray')
+plt.title('Fourier', {'fontsize': 10})
+plt.subplot(3, 3, 5)
+plt.imshow(ButterworthFilter, cmap='gray')
+plt.title('ButterworthFilter (order = ' + str(n) + ', D0 = ' + str(d0) + ')', {'fontsize': 10})
+plt.subplot(3, 3, 6)
+plt.imshow(scipy.log10(1+scipy.absolute(imageFFTFiltered)), cmap='gray')
+plt.title('FilteredFourier', {'fontsize': 10})
+plt.subplot(3, 3, 9)
+plt.imshow(imageFiltered, cmap='gray')
+plt.title('FilteredImage', {'fontsize': 10})
+
+plt.show()
+

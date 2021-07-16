@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+from skimage import io, filters, feature
+import numpy
+from scipy import fftpack
+import scipy
+
+# Load image file
+fpath = 'F:/MIPL/SDS/0.excercise/2/ex2-3_LPF_HPF/'
+image = io.imread(fpath + 'character.tif').astype('float64')
+
+# Fourier Transform
+imageFFT = scipy.log10(1+scipy.absolute(fftpack.fft2(image)))
+imageFFT = fftpack.fftshift(imageFFT)
+
+# Plot
+plt.subplot(1, 2, 1)
+plt.imshow(image, cmap='gray')
+plt.subplot(1, 2, 2)
+plt.imshow(imageFFT, cmap='gray')
+
+plt.show()
+
