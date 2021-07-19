@@ -23,16 +23,16 @@ fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter(out_path, fourcc, movie.get(cv2.CAP_PROP_FPS),
                       (int(movie.get(cv2.CAP_PROP_FRAME_WIDTH)), int(movie.get(cv2.CAP_PROP_FRAME_HEIGHT))))
 
-# Load pretrained model
+# load pretrained model
 FaceDetector = cv2.CascadeClassifier(cv2.data.haarcascades + '/haarcascade_frontalface_alt.xml')
 
-# Detection parameter
+# detection parameter
 Params = {'maxSize': (100, 100)}
 
-# Read until video is completed
+# read until video is completed
 
 while (movie.isOpened()):
-    # Capture frame-by-frame
+    # capture frame-by-frame
     ret, frame = movie.read()
 
     if ret == True:
@@ -62,16 +62,16 @@ while (movie.isOpened()):
         # write frame
         out.write(frame)
 
-        # Press Q on keyboard to  exit
+        # press Q on keyboard to  exit
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
 
-    # Break the loop
+    # break the loop
     else:
         break
 
-# When everything done, release the video capture object
+# when everything done, release the video capture object
 movie.release()
 
-# Closes all the frames
+# closes all the frames
 cv2.destroyAllWindows()

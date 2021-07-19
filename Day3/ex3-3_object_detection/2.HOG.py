@@ -22,13 +22,18 @@ hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
 # widStride :Window movement amount
 # padding   :Extended range around the input image
-# scale     :scale
+# scale     :Scale of image for feature extraction
 hogParams = {'winStride': (8, 8), 'padding': (32, 32), 'scale': 1.05}
+# adjust paramters
+#---------- YOUR CODE HERE ----------#
+hogParams = None
+#------------------------------------#
 
-# Detected person coordinate by the created identifier device
+
+# detected person coordinate by the created identifier device
 human, r = hog.detectMultiScale(im, **hogParams)
 
-# Surround a person's area with a red rectangle
+# surround a person's area with a red rectangle
 for (x, y, w, h) in human:
     cv2.rectangle(im, (x, y), (x + w, y + h), (0, 50, 255), 3)
 
@@ -41,3 +46,4 @@ except:  # running in Colab
   plt.imshow(im_rgb)
   plt.title("results human detect by DefaultHoGPeopleDetector")
   plt.show()
+
