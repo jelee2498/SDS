@@ -26,7 +26,7 @@ hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 hogParams = {'winStride': (8, 8), 'padding': (32, 32), 'scale': 1.05}
 # adjust paramters
 #---------- YOUR CODE HERE ----------#
-hogParams = None
+# hogParams = None
 #------------------------------------#
 
 

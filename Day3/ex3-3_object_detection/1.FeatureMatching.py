@@ -20,7 +20,7 @@ objectImage = cv2.imread('./SDS/Day3/ex3-3_object_detection/mingkydoll.jpg', 0)
 """
 Hint: use cv2.imread()
 """
-objectImage = None
+# objectImage = None
 #------------------------------------#
 if isinstance(Image, np.ndarray):  # running in Colab
     pass
@@ -31,7 +31,7 @@ else:  # running in Pycharm
     """
     Hint: use cv2.imread()
     """
-    objectImage = None
+    # objectImage = None
     #------------------------------------#
 
 # calculate keypoints
