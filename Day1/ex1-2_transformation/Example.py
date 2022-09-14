@@ -1,6 +1,6 @@
 
 """
-Rotation - 2
+Example
 """
 
 import matplotlib.pyplot as plt
@@ -15,23 +15,28 @@ from functools import reduce
 image = io.imread('./cameraman.tif')
 imageTransformed = np.zeros_like(image)
 
-# make transformation matrix: translation -> rotation -> translation
+# make transformation matrix
 
 iMax, jMax = np.shape(image)
 
-# translate so that center of image to be origin
-Tx = - (iMax - 1) / 2
-Ty = - (jMax - 1) / 2
+Tx = ?
+Ty = ?
 Translation = [[1, 0, Tx],
                [0, 1, Ty],
                [0, 0, 1]]
 
-Theta = math.radians(30)
+Theta = math.radians(?)
 Rotation = [[math.cos(Theta), -math.sin(Theta), 0],
             [math.sin(Theta), math.cos(Theta), 0],
             [0, 0, 1]]
 
-T = reduce(np.dot, [np.linalg.inv(Translation), Rotation, Translation])
+Shx = ?
+Shy = ?
+Shear = [[1, Shx, 0],
+         [Shy, 1, 0],
+         [0, 0, 1]]
+
+T = reduce(np.dot, [?, ?, ?, ?])
 T_inv = np.linalg.inv(T)
 
 # apply transform

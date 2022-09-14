@@ -1,6 +1,6 @@
 
 """
-Translation-1
+Shearing
 """
 
 import matplotlib.pyplot as plt
@@ -12,21 +12,15 @@ import numpy as np
 image = io.imread('./cameraman.tif')
 imageTranslated = np.zeros_like(image)
 
-# make transform matrix: x->x+15, y->y+30
+# make transform matrix
 
-# x - vertical axis
-# y - horizontal axis
-Tx = 15
-Ty = 30
+Shx = 0.1
+Shy = 0.3
 
-T = [[1, 0, Tx],
-     [0, 1, Ty],
+T = [[1, Shx, 0],
+     [Shy, 1, 0],
      [0, 0, 1]]
 T_inv = np.linalg.inv(T)
-
-print('')
-print('Inverse transformation matrix')
-print(T_inv)
 
 # apply transform
 

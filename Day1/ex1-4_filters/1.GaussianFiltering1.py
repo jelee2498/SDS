@@ -13,12 +13,6 @@ import math
 import scipy.stats as st
 from scipy import signal
 
-
-try:  # running in Colab
-    image = io.imread('./SDS/Day1/ex1-4_filters/lena_gray.gif')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./lena_gray.gif')
-
 def gkern(kernlen, nsig):
     """
     Return 2D Gaussian kernel
@@ -57,16 +51,20 @@ def imageConvolution(Image, Kernel):
 
     return ConvImage
 
+
+image = io.imread('./lena_gray.gif')
+
 # kernel setting
 kernelSize = 11 # odd number
 kernelRadius = (kernelSize - 1) / 2
 
+plt.figure(figsize=(10,5))
 for i in range(3):
     sigma = 1 + 2 * i
+
     # for surface plot
     x = np.linspace(-kernelRadius, kernelRadius, kernelSize)
     y = np.linspace(-kernelRadius, kernelRadius, kernelSize)
-
     X, Y = np.meshgrid(x, y)
 
     # caculate Gaussian kernel
@@ -81,6 +79,6 @@ for i in range(3):
     ax = plt.subplot(2, 3, i+4)
     ax.imshow(imageConvolution(image, GaussianKernel), cmap='gray')
 
-    i += 1
-
 plt.show()
+
+

@@ -1,6 +1,6 @@
 
 """
-Gaussian filtering - 2
+Highboost filtering
 """
 
 import matplotlib.pyplot as plt
@@ -12,6 +12,7 @@ import numpy as np
 import math
 import scipy.stats as st
 from scipy import signal
+import cv2
 
 def gkern(kernlen, nsig):
     """
@@ -51,34 +52,33 @@ def imageConvolution(Image, Kernel):
 
     return ConvImage
 
-image = io.imread('./lena_gray.gif')
 
-sigma = 3
+image = io.imread('./einstein.jpg')
 
-plt.figure(figsize=(10,5))
+# kernel setting
+kernelSize = 11 # odd number
+kernelRadius = (kernelSize - 1) / 2
+sigma = 5
+
+# caculate Gaussian kernel
+GaussianKernel = gkern(kernelSize, sigma)
+
+# blur the image
+blurred_image = imageConvolution(image, GaussianKernel)
+
+# subtract blurred image from the original image -> high-frequency components
+hf_components = cv2.addWeighted(image, 1, blurred_image, -1, 0)
+
+plt.figure(figsize=(10,3))
 for i in range(3):
-    # kernel setting
-    kernelSize = 5 + i * 4
-    kernelRadius = (kernelSize - 1) / 2
+    k = 2 * i
 
-    # for surface plot
-    x = np.linspace(-kernelRadius, kernelRadius, kernelSize)
-    y = np.linspace(-kernelRadius, kernelRadius, kernelSize)
-    X, Y = np.meshgrid(x, y)
+    # add high-frequency components to original image
+    sharpend_image = cv2.addWeighted(image, 1, hf_components, k, 0)
 
-    # caculate Gaussian kernel
-    GaussianKernel = gkern(kernelSize, sigma)
-
-    # plot kernel
-    ax = plt.subplot(2, 3, i+1, projection='3d')
-    ax.plot_surface(X, Y, GaussianKernel, cmap='viridis', edgecolor='none')
-    plt.title('KernelSize = ' + str(kernelSize))
-
-    # plot filtered image
-    ax = plt.subplot(2, 3, i+4)
-    ax.imshow(imageConvolution(image, GaussianKernel), cmap='gray')
-
-    i += 1
+    ax = plt.subplot(1, 3, i+1)
+    ax.imshow(sharpend_image, cmap='gray')
 
 plt.show()
+
 

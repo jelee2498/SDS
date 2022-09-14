@@ -11,11 +11,7 @@ import numpy as np
 import math
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day1/ex1-2_transformation/cameraman.tif')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./cameraman.tif')
-
+image = io.imread('./cameraman.tif')
 imageRotated = np.zeros_like(image)
 
 # make transformation matrix: 30 degree
@@ -26,7 +22,6 @@ T = [[math.cos(Theta), -math.sin(Theta), 0],
      [0, 0, 1]]
 T_inv = np.linalg.inv(T)
 
-
 # apply transform
 
 iMax, jMax = np.shape(image)
@@ -36,12 +31,10 @@ while iRotated < iMax:
     jRotated = 0
     while jRotated < jMax:
         # find native coordinates using T_inv
-        nativeI, nativeJ, _ = np.dot(T_inv, np.transpose([iRotated,
-                                                         jRotated, 1]))
+        nativeI, nativeJ, _ = np.dot(T_inv, np.transpose([iRotated, jRotated, 1]))
         # map value of native coordinates to the corresponding imageTranslated coordinates
         # order: the order of the spline interpolation
-        imageRotated[iRotated, jRotated] = ndimage.map_coordinates(image,
-                                                    [[nativeI], [nativeJ]], order=1)
+        imageRotated[iRotated, jRotated] = ndimage.map_coordinates(image, [[nativeI], [nativeJ]], order=1)
         jRotated += 1
     iRotated += 1
 

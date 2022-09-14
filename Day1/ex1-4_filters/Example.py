@@ -9,19 +9,12 @@ import numpy
 from scipy import signal
 import math
 
-
-try:  # running in Colab
-    image = io.imread('./SDS/Day1/ex1-4_filters/lena_gray.gif')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./lena_gray.gif')
-
 def gkern(kernlen, nsig):
     # Return 2D Gaussian Kernel
     gkern1d = signal.gaussian(kernlen, std=nsig).reshape(kernlen, 1)
     kernel = numpy.outer(gkern1d, gkern1d)
 
     return kernel/kernel.sum()
-
 
 def imageConvolution(image,kernel):
 
@@ -42,6 +35,9 @@ def imageConvolution(image,kernel):
         i = i + 1
 
     return ConvImage.astype('uint8')
+
+
+image = io.imread('./lena_gray.gif')
 
 PIXEL_MAX = 255
 
@@ -65,48 +61,50 @@ MedianFilterWindow = morphology.square(kernelSize)
 
 # original image
 
-plt.figure(figsize=(18, 18))
+plt.figure(figsize=(18, 15))
 
 ax = plt.subplot(3, 4, 1)
 ax.imshow(image, cmap='gray')
-plt.title('OriginalImage')
+plt.title('Original Image')
 # NRMSE: normalized root mean squared error
 # if compare_nrmse is deprecated, then use normalized_root_mse instead
 # SSIM: structural similarity index measure
 # if compare_ssim is deprecated, then use structural_similarity instead
-plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, image,
-                                                             normalization='mean'), 4)) +
+plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, image, normalization='mean'), 4)) +
            ', SSIM: ' + str(round(metrics.structural_similarity(image, image), 4)))
 
 # Gaussian nosie reduction
 
 ax = plt.subplot(3, 4, 2)
-ax.imshow(image, cmap='gray')
+ax.imshow(imageGaussianNoise, cmap='gray')
 plt.title('GaussainNoise')
-plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, imageGaussianNoise,
-                                                             normalization='mean'), 4)) +
+plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, imageGaussianNoise, normalization='mean'), 4)) +
            ', SSIM: ' + str(round(metrics.structural_similarity(image, imageGaussianNoise), 4)))
 
 ax = plt.subplot(3, 4, 3)
 filteredImage = imageConvolution(imageGaussianNoise, GaussianKernel)
 ax.imshow(filteredImage, cmap='gray')
 plt.title('GaussainFiltering')
-plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, imageGaussianNoise,
-                                                             normalization='mean'), 4)) +
-           ', SSIM: ' + str(round(metrics.structural_similarity(image, imageGaussianNoise), 4)))
+plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, filteredImage,normalization='mean'), 4)) +
+           ', SSIM: ' + str(round(metrics.structural_similarity(image, filteredImage), 4)))
 
 ax = plt.subplot(3, 4, 4)
 filteredImage = filters.median(imageGaussianNoise, MedianFilterWindow)
 ax.imshow(filteredImage, cmap='gray')
 plt.title('MedianFiltering')
-plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, imageGaussianNoise,
-                                                             normalization='mean'), 4)) +
-           ', SSIM: ' + str(round(metrics.structural_similarity(image, imageGaussianNoise), 4)))
+plt.xlabel('NRSME: ' + str(round(metrics.normalized_root_mse(image, filteredImage, normalization='mean'), 4)) +
+           ', SSIM: ' + str(round(metrics.structural_similarity(image, filteredImage), 4)))
 
-# Salt & Pepper Noise Reduction
-''' Write Your Answer here '''
+# salt & pepper noise reduction
 
-# Speckle Noise Reduction
-''' Write Your Answer here '''
+"""
+Your code here
+"""
+
+# speckle noise reduction
+
+"""
+Your code here
+"""
 
 plt.show()

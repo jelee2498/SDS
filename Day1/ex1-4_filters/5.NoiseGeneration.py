@@ -9,10 +9,7 @@ import numpy
 from skimage import morphology
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day1/ex1-4_filters/lena_gray.gif')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./lena_gray.gif')
+image = io.imread('./lena_gray.gif')
 
 # make noise image
 imageGaussianNoise = util.noise.random_noise(image, mode='gaussian')
@@ -20,6 +17,8 @@ imageSaltAndPepper = util.noise.random_noise(image, mode='s&p')
 imageSpeckleNoise = util.noise.random_noise(image, mode='speckle')
 
 # Check result
+
+plt.figure(figsize=(15,3))
 
 plt.subplot(1, 4, 1)
 plt.imshow(image, cmap='gray')
