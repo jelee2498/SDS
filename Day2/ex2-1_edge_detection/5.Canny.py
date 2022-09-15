@@ -1,23 +1,23 @@
 
 """
-Canny
+5. Canny
 """
 
 import matplotlib.pyplot as plt
-from skimage import io, filters, feature
+from skimage import io, filters, feature, img_as_float
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day2/ex2-1_edge_detection/sample2.jpg')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./sample2.jpg')
+image = io.imread('./dog.jpg')
 
+# all channels aren't necessary for edge detection
 image = image[:, :, 0]
 
+# change the data type of image from uint8 to float64
+image = img_as_float(image)
 
 # plot original image
 
-plt.figure(figsize=(15, 15))
+plt.figure(figsize=(15, 3))
 
 plt.subplot(1, 4, 1)
 plt.imshow(image, cmap='gray')

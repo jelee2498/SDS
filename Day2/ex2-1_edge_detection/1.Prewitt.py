@@ -1,37 +1,13 @@
 
 """
-Prewitt
+1. Prewitt - solution
 """
 
 import matplotlib.pyplot as plt
-from skimage import io, filters
+from skimage import io, filters, img_as_float
 import scipy
 from scipy import ndimage
 import numpy as np
-
-
-try:  # running in Colab
-    image = io.imread('./SDS/Day2/ex2-1_edge_detection/sample1.jpg')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./sample1.jpg')
-
-# All channels aren't necessary for edge detection
-image = image[:, :, 0]
-
-
-# define Prewitt kernel
-
-# horizontal edge kernel
-prewitt_h = np.array([[ 1/3,  1/3,  1/3],
-                      [   0,    0,    0],
-                      [-1/3, -1/3, -1/3]])
-# vertical edge kernel
-prewitt_v = np.array([[ 1/3,    0,  -1/3],
-                      [ 1/3,    0,  -1/3],
-                      [ 1/3,    0,  -1/3]])
-
-
-# define imageConvolution
 
 def imageConvolution(Image, Kernel):
     """
@@ -60,7 +36,6 @@ def imageConvolution(Image, Kernel):
             """
             Hint: Use np.multiply() 
             """
-            ConvImage[i ,j] = None
 
             #------------------------------------#
             j += 1
@@ -69,59 +44,38 @@ def imageConvolution(Image, Kernel):
     return ConvImage
 
 
+image = io.imread('./stripe.jpg')
+
+# all channels aren't necessary for edge detection
+image = image[:, :, 0]
+
+# change the data type of image from uint8 to float64
+image = img_as_float(image)
+
+# define Prewitt kernel
+
+# horizontal edge kernel
+prewitt_h = np.array([[ 1/3,  1/3,  1/3],
+                      [   0,    0,    0],
+                      [-1/3, -1/3, -1/3]])
+# vertical edge kernel
+prewitt_v = np.array([[ 1/3,    0,  -1/3],
+                      [ 1/3,    0,  -1/3],
+                      [ 1/3,    0,  -1/3]])
+
 # make edge images
 
 edge_h = imageConvolution(image, prewitt_h)
 edge_v = imageConvolution(image, prewitt_v)
 
-
 # plot
 
-plt.figure(figsize=(10,10))
+plt.figure(figsize=(12,3))
 
 # plot 3 images (original image, horizontal edge, vertical edge)
 #---------- YOUR CODE HERE ----------#
 """
-Hint: Use plt.subplot()
-"""
-
-
-#------------------------------------#
-
-plt.show()
-
-
-#-2 Using skimage module
-
-# edge filtering
-
-VerticalEdges = filters.prewitt_v(image)
-HorizontalEdges = filters.prewitt_h(image)
-
-# plot
-
-plt.figure(figsize=(10,10))
-
-plt.subplot(1, 4, 1)
-plt.imshow(image, cmap='gray')
-plt.title('Original Image')
-
-plt.subplot(1, 4, 2)
-plt.imshow(VerticalEdges, cmap='gray')
-plt.title('Vertical Edges')
-
-plt.subplot(1, 4, 3)
-plt.imshow(HorizontalEdges, cmap='gray')
-plt.title('Horizontal Edges')
-
-plt.subplot(1, 4, 4)
-plt.imshow(VerticalEdges + HorizontalEdges, cmap='gray')
-plt.title('Vert + Horiz')
-
-# fix VerticalEdges + HorizontalEdges plot in order that edges are visible
-#---------- YOUR CODE HERE ----------#
-"""
-Hint: Use np.abs()
+Hint: Use plt.subplot
 """
 
 #------------------------------------#

@@ -1,23 +1,24 @@
 
 """
-Laplacian of Gaussian
+4. Laplacian of Gaussian
 """
 
 import matplotlib.pyplot as plt
-from skimage import io, filters
+from skimage import io, filters, img_as_float
 import scipy
 from scipy import ndimage
 import numpy as np
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day2/ex2-1_edge_detection/sample2.jpg')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./sample2.jpg')
+image = io.imread('./dog.jpg')
 
-image = image[:, :, 0].astype('float64')
+# all channels aren't necessary for edge detection
+image = image[:, :, 0]
 
-plt.figure(figsize=(18, 18))
+# change the data type of image from uint8 to float64
+image = img_as_float(image)
+
+plt.figure(figsize=(10, 12))
 
 plt.subplot(3, 3, 1)
 plt.imshow(image, cmap='gray')
