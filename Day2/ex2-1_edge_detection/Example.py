@@ -1,6 +1,6 @@
 
 """
-Example (Lung nodule segmentation)
+Example (Lung nodule segmentation) - solution
 """
 
 import nibabel as nib
@@ -19,21 +19,12 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import scipy.misc
 
-CT_OFFSET = 1024
-ZERO_VALUE = -2048
 
-path = "lung.nii"
+img = nib.load("lung_clippled.nii").get_fdata()
+gt = nib.load("gt_clippled.nii").get_fdata()
 
-img = nib.load(path).get_fdata()
-img2 = np.transpose(img, (2,1,0))
-gt = nib.load("nodule.nii").get_fdata()
-gt2 = np.transpose(gt, (2,1,0))
-
-i = 121
-target = img[:,:,i]
-GT_target = gt[:,:,i]
-plt.imshow(target.T, cmap='gray')
-plt.imshow(GT_target.T, alpha=0.2, cmap='jet')
+plt.imshow(img.T, cmap='gray')
+plt.imshow(gt.T, alpha=0.2, cmap='jet')
 plt.show()
 
 def segmentLung(image, gt):
@@ -92,6 +83,7 @@ def segmentLung(image, gt):
     '''
     Step 5: Superimpose the binary mask on the input image.
     '''
+    ZERO_VALUE = -2048
     #---------- YOUR CODE HERE ----------#
     """
     Hint: Use '==' logical operator
@@ -121,4 +113,4 @@ def segmentLung(image, gt):
 
     plt.show()
 
-segmentLung(img2[i], gt2[i])
+segmentLung(img.T, gt.T)
