@@ -1,6 +1,6 @@
 
 """
-Histogram of gradient (HOG)
+2. Histogram of gradient (HOG)
 """
 
 import cv2
@@ -8,11 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-im = cv2.imread('./SDS/Day3/ex3-3_object_detection/people.jpg')
-if isinstance(im, np.ndarray):  # running in Colab
-    pass
-else:  # running in Pycharm
-    im = cv2.imread('./people.jpg')
+im = cv2.imread('./people.jpg')
 
 # calculation of HoG feature quantity
 hog = cv2.HOGDescriptor()
@@ -26,9 +22,8 @@ hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 hogParams = {'winStride': (8, 8), 'padding': (32, 32), 'scale': 1.05}
 # adjust paramters
 #---------- YOUR CODE HERE ----------#
-# hogParams = None
+hogParams = {'winStride': ?, 'padding': ?, 'scale': ?}
 #------------------------------------#
-
 
 # detected person coordinate by the created identifier device
 human, r = hog.detectMultiScale(im, **hogParams)

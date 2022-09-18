@@ -1,6 +1,6 @@
 
 """
-Face detection in movie
+4. Real time face detection
 """
 
 import cv2
@@ -9,13 +9,8 @@ from imutils.object_detection import non_max_suppression
 import matplotlib.pyplot as plt
 
 
-movie = cv2.VideoCapture('./SDS/Day3/ex3-3_object_detection/AESPA.mp4')
-out_path = './SDS/Day3/ex3-3_object_detection/AESPA_face_detection.avi'
-if movie.isOpened():  # running in Colab
-    pass
-else:  # running in Pycharm
-    movie = cv2.VideoCapture('./AESPA.mp4')
-    out_path = './AESPA_face_detection.avi'
+movie = cv2.VideoCapture('./newjeans_video.mp4')
+out_path = './newjeans_video_face_detection.avi'
 
 # define the codec and create VideoWriter object
 

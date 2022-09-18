@@ -1,6 +1,6 @@
 
 """
-Region growing
+4. Region growing
 """
 
 import matplotlib.pyplot as plt
@@ -9,12 +9,7 @@ import numpy as np
 import seaborn as sns
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day3/ex3-2_segmentation/medtest.png').astype('int')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./medtest.png').astype('int')
-
-# region growing
+image = io.imread('./medtest.png').astype('int')
 
 # seed pixel
 seedI = 187
@@ -25,7 +20,6 @@ maxDiff = 50
 
 sizeI, sizeJ = image.shape
 
-# segmentation map
 segMap = np.zeros_like(image)
 segMap[seedI, seedJ] = 1
 

@@ -1,6 +1,6 @@
 
 """
-Face detection
+3. Face detection
 """
 
 import cv2
@@ -9,11 +9,7 @@ from imutils.object_detection import non_max_suppression
 import matplotlib.pyplot as plt
 
 
-Image = cv2.imread('./SDS/Day3/ex3-3_object_detection/face.jpg')
-if isinstance(Image, np.ndarray):   # running in Colab
-    pass
-else:  # running in Pycharm
-    Image = cv2.imread('./face.jpg')
+Image = cv2.imread('./newjeans.jpg')
 
 # if 'AttributeError: module 'cv2' has no attribute 'data' happens
 # install opencv-contrib-python package
@@ -37,11 +33,11 @@ try:  # running in Pycharm
     cv2.imshow("Image", Image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    cv2.imwrite('./face_detection.png', Image)
+    cv2.imwrite('./newjeans_face_detection.png', Image)
 except:  # running in Colab
     Image_rgb = cv2.cvtColor(Image, cv2.COLOR_BGR2RGB)
     plt.imshow(Image_rgb)
     plt.title("Image")
     plt.show()
-    cv2.imwrite('./SDS/Day3/ex3-3_object_detection/face_detection.png', Image)
+    cv2.imwrite('./newjeans_face_detection.png', Image)
 

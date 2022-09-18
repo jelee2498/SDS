@@ -1,6 +1,6 @@
 
 """
-Feature matching
+1. Feature matching
 """
 
 import matplotlib.pyplot as plt
@@ -10,29 +10,13 @@ import numpy as np
 
 
 # cv2.imread(fileName, flag)
-# flag option#1 :cv2.IMREAD_COLOR (1)
-# flag option#2 :cv2.IMREAD_GRAYSCALE (0)
-# flag option#3 :cv2.IMREAD_UNCHANGED (-1)
+# flag option#1: cv2.IMREAD_COLOR (1)
+# flag option#2: cv2.IMREAD_GRAYSCALE (0)
+# flag option#3: cv2.IMREAD_UNCHANGED (-1)
 
-Image = cv2.imread('./SDS/Day3/ex3-3_object_detection/mingky.jpg', 0)
-objectImage = cv2.imread('./SDS/Day3/ex3-3_object_detection/mingkydoll.jpg', 0)
-#---------- YOUR CODE HERE ----------#
-"""
-Hint: use cv2.imread()
-"""
-# objectImage = None
-#------------------------------------#
-if isinstance(Image, np.ndarray):  # running in Colab
-    pass
-else:  # running in Pycharm
-    Image = cv2.imread('./mingky.jpg', 0)
-    objectImage = cv2.imread('./mingkydoll.jpg', 0)
-    #---------- YOUR CODE HERE ----------#
-    """
-    Hint: use cv2.imread()
-    """
-    # objectImage = None
-    #------------------------------------#
+Image = cv2.imread('./mingky.jpg', 0)
+objectImage = cv2.imread('./mingkydoll.jpg', 0)
+# objectImage = cv2.imread('./mingkyHead.jpg', 0)
 
 # calculate keypoints
 
@@ -57,3 +41,9 @@ plt.imshow(img3)
 
 plt.show()
 
+# plot key points
+
+plt.figure(dpi=150)
+plt.imshow(cv2.drawKeypoints(objectImage, kp1, None, flags=0))
+
+plt.show()

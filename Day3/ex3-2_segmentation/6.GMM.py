@@ -1,6 +1,6 @@
 
 """
-Gaussian mixture model (GMM)
+6. Gaussian mixture model (GMM)
 """
 
 import matplotlib.pyplot as plt
@@ -10,10 +10,7 @@ from sklearn.mixture import GaussianMixture
 from scipy import stats
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day3/ex3-2_segmentation/flower.jpg')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./flower.jpg')
+image = io.imread('./flower.jpg')
 
 # convert RGB to HSV
 imageHSV = color.rgb2hsv(image)

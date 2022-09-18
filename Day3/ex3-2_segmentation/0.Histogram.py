@@ -1,6 +1,6 @@
 
 """
-Image histogram
+0. Image histogram
 """
 
 import matplotlib.pyplot as plt
@@ -8,10 +8,7 @@ from skimage import io
 import numpy as np
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day3/ex3-2_segmentation/coins.png')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./coins.png')
+image = io.imread('./coins.png')
 
 # image histogram
 

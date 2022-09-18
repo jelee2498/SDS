@@ -1,6 +1,6 @@
 
 """
-K-means clustering
+5. K-means clustering
 """
 
 import matplotlib.pyplot as plt
@@ -8,10 +8,7 @@ from skimage import io
 import numpy as np
 
 
-try:  # running in Colab
-    image = io.imread('./SDS/Day3/ex3-2_segmentation/wallpaper.jpg').astype('int')
-except FileNotFoundError:  # running in Pycharm
-    image = io.imread('./wallpaper.jpg').astype('int')
+image = io.imread('./wallpaper.jpg').astype('int')
 
 sizeI, sizeJ, sizeK = image.shape
 
@@ -21,8 +18,6 @@ imageRGBvect = image.reshape(-1, 3)
 # Kmeans initialization
 k = 3
 ClusterCenters = np.random.randint(low=0, high=255, size=(k,3))
-
-# Kmeans clustering
 
 convergeLimit = 10
 deltaMeans = 99999
@@ -45,7 +40,7 @@ while deltaMeans > convergeLimit and iterN < maxIter:
     """
     Hint: use argmin function
     """
-    clustersAssigned = None
+    clustersAssigned = ?
     #------------------------------------#
 
     # cluster update
